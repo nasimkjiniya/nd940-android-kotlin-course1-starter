@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">ShoeStore</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //Login Screen
+    <string name="login_textview">Login</string>
+    <string name="email_textview">Email : </string>
+    <string name="email_edittext">Enter Your Email </string>
+    <string name="password_edittext">Enter Your password </string>
+    <string name="password_textview">Password : </string>
+    <string name="login_button">Login</string>
+    <string name="login_with_existing_button">Login with Existing Account</string>
+
+
+    //Welcome Screen
+    <string name="welcome_textview">Welcome To The</string>
+    <string name="shoestore_textview">* Shoe Store *</string>
+    <string name="instructions_button">Instructions -> </string>
+
 </resources>
