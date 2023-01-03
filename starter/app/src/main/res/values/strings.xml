@@ -18,4 +18,13 @@
     <string name="shoestore_textview">* Shoe Store *</string>
     <string name="instructions_button">Instructions -> </string>
 
+    //Instructions Screen
+    <string name="instruction_headline_textview"># Instructions #</string>
+    <string name="instructions_textview">Congratulations! You have now access to your shoe list as well as you can add new shoe to your list
+        \n\nEnjoy your Shoe Store App!
+    </string>
+
+    <string name="shoeList_button">My Shoe List -> </string>
+
+
 </resources>
