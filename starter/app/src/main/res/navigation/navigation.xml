@@ -30,5 +30,28 @@
         android:id="@+id/instructionsFragment"
         android:name="com.udacity.shoestore.fragments.InstructionsFragment"
         android:label="fragment_instructions"
-        tools:layout="@layout/fragment_instructions" />
+        tools:layout="@layout/fragment_instructions" >
+        <action
+            android:id="@+id/action_instructionsFragment_to_shoeListFragment"
+            app:destination="@id/shoeListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoeListFragment"
+        android:name="com.udacity.shoestore.fragments.ShoeListFragment"
+        android:label="ShoeListFragment" >
+        <action
+            android:id="@+id/action_shoeListFragment_to_shoeDetailsFragment"
+            app:destination="@id/shoeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoeDetailsFragment"
+        android:name="com.udacity.shoestore.fragments.ShoeDetailsFragment"
+        android:label="fragment_shoe_details"
+        tools:layout="@layout/fragment_shoe_details" >
+        <action
+            android:id="@+id/action_shoeDetailsFragment_to_shoeListFragment"
+            app:destination="@id/shoeListFragment"
+            app:popUpTo="@id/shoeDetailsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

@@ -67,6 +67,9 @@ class LoginFragment : Fragment() {
             val action = LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
             NavHostFragment.findNavController(this).navigate(action)   // fragment transaction
         }
+
+        val action = LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
+        NavHostFragment.findNavController(this).navigate(action)
     }
 
 }

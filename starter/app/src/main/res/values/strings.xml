@@ -23,8 +23,19 @@
     <string name="instructions_textview">Congratulations! You have now access to your shoe list as well as you can add new shoe to your list
         \n\nEnjoy your Shoe Store App!
     </string>
-
     <string name="shoeList_button">My Shoe List -> </string>
+
+    //Shoe List Screen
+    <string name="floatingButton_description">Add New Shoe Detail</string>
+
+    //Shoe Details Screen
+    <string name="shoedetails_textview">Add a new Shoe</string>
+    <string name="shoe_name_textview">Name : </string>
+    <string name="shoe_company_textview">Company : </string>
+    <string name="shoe_size_textview">Size : </string>
+    <string name="shoe_description_textview">Description : </string>
+    <string name="cancel_button">Cancel</string>
+    <string name="save_button">Save</string>
 
 
 </resources>

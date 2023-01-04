@@ -12,6 +12,7 @@ import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentInstructionsBinding
 import com.udacity.shoestore.databinding.FragmentLoginBinding
 import com.udacity.shoestore.models.LoginViewModel
+import com.udacity.shoestore.models.Shoe
 
 class InstructionsFragment : Fragment() {
 
@@ -50,7 +51,8 @@ class InstructionsFragment : Fragment() {
 
     private fun gotoMyShoeList()
     {
-
+        val action = InstructionsFragmentDirections.actionInstructionsFragmentToShoeListFragment()
+        NavHostFragment.findNavController(this).navigate(action)   // fragment transaction
     }
 
 }
