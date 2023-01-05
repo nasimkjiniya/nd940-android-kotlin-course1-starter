@@ -56,7 +56,7 @@ class LoginFragment : Fragment() {
                     requireActivity().finish()
                 }
             }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         binding.loginButton.setOnClickListener()
         {
