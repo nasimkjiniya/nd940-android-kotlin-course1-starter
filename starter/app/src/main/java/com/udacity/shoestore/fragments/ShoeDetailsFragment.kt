@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
@@ -69,27 +70,36 @@ class ShoeDetailsFragment : Fragment() {
             ,binding.companyEdittext.text.toString().trim(),binding.descriptionEdittext.text.toString().trim())
 
             MainActivity.viewModel.addNewShoe(newShoe)
-
-            val action=ShoeDetailsFragmentDirections.actionShoeDetailsFragmentToShoeListFragment()
-            NavHostFragment.findNavController(this).navigate(action)
+            Toast.makeText(context,getString(R.string.shoe_added_message),Toast.LENGTH_SHORT).show()
+            resetFields()
+//            val action=ShoeDetailsFragmentDirections.actionShoeDetailsFragmentToShoeListFragment()
+//            NavHostFragment.findNavController(this).navigate(action)
         }
+    }
+
+    private fun resetFields()
+    {
+        binding.nameEdittext.text.clear()
+        binding.companyEdittext.text.clear()
+        binding.sizeEdittext.text.clear()
+        binding.descriptionEdittext.text.clear()
     }
 
     private fun areFeildsValid() : Boolean
     {
         if(binding.nameEdittext.text.toString().trim() == "")
         {
-            binding.nameEdittext.error="This Field can not be emptied!"
+            binding.nameEdittext.error=getString(R.string.empty_field_message)
             return false
         }
         else if(binding.companyEdittext.text.toString().trim() == "")
         {
-            binding.companyEdittext.error="This Field can not be emptied!"
+            binding.companyEdittext.error=getString(R.string.empty_field_message)
             return false
         }
         else if(binding.sizeEdittext.text.toString().trim() == "")
         {
-            binding.sizeEdittext.error="This Field can not be emptied!"
+            binding.sizeEdittext.error= getString(R.string.empty_field_message)
             return false
         }
         return true

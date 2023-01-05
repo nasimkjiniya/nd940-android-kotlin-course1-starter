@@ -1,26 +1,29 @@
 package com.udacity.shoestore.fragments
 
+import android.opengl.Visibility
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.MainActivity
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.models.Shoe
-import com.udacity.shoestore.models.ShoeListViewModel
+import kotlinx.android.synthetic.main.fragment_shoe_list.*
 import timber.log.Timber
 
 
 class ShoeListFragment : Fragment() {
 
     private lateinit var binding: FragmentShoeListBinding
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +36,7 @@ class ShoeListFragment : Fragment() {
             false
         )
 
-        //getElements()
+        setHasOptionsMenu(true)
         initElements()
 
         return binding.root
@@ -51,10 +54,6 @@ class ShoeListFragment : Fragment() {
             }
         })
 
-        MainActivity.viewModel.shoeName.observe(viewLifecycleOwner, Observer { newName->
-            Timber.i("Added a new shoeName -> ${newName}")
-        })
-
         binding.floatingActionButton.setOnClickListener()
         {
             gotoShoeDetailsPage()
@@ -63,18 +62,48 @@ class ShoeListFragment : Fragment() {
 
     private fun createNewLayout(newShoe: Shoe)
     {
-        val textView = TextView(context)
-        textView.setLayoutParams(
-            ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
+        val l = LinearLayout(context)
+        val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
         )
+        params.setMargins(10, 10, 10, 10)
+        l.layoutParams = params
+        l.orientation = LinearLayout.HORIZONTAL
+
+        val name_text = TextView(context)
+        name_text.setSingleLine(false);
+        val paramsTextView = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT)
+        paramsTextView.setMargins(15,0,0,0)
+        paramsTextView.weight = 0.8f
+        name_text.textSize = 25f
+        name_text.layoutParams = paramsTextView
+
+        val image = ImageView(context)
+        val paramsImgView = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT)
+        paramsImgView.gravity=Gravity.CENTER
+        paramsImgView.weight = 0.2f
+        image.setBackground(resources.getDrawable(R.drawable.shoes,null))
+
+        l.addView(image)
+        l.addView(name_text)
+
         if(newShoe!=null)
         {
-            textView.text= newShoe.name
-            binding.linearLayout.addView(textView)
+            binding.emptyTextview.visibility=View.GONE
+            name_text.text= newShoe.name+" (${newShoe.size}) \n"+newShoe.company+"\n"+newShoe.description
+            binding.linearLayout.addView(l)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.logout_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
+                || super.onOptionsItemSelected(item)
     }
 
     private fun gotoShoeDetailsPage()

@@ -29,9 +29,6 @@ class LoginViewModel : ViewModel() {
     val isValidPassword : LiveData<Boolean>
         get() = _isValidPassword
 
-    init {
-
-    }
 
     fun isEmailValid(email_txt : String) : Boolean
     {
@@ -40,6 +37,9 @@ class LoginViewModel : ViewModel() {
 
     fun isPasswordValid(password_txt :String) :Boolean
     {
+        if(password_txt.length!=8)
+            return false
+
         return true
     }
 

@@ -1,11 +1,13 @@
 package com.udacity.shoestore.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.udacity.shoestore.R
@@ -46,30 +48,44 @@ class LoginFragment : Fragment() {
 
     private fun initElements()
     {
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    // Handle the back button event
+                    requireActivity().finish()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
         binding.loginButton.setOnClickListener()
         {
             doLogin()
         }
+
+        binding.loginExistingButton.setOnClickListener()
+        {
+            doLogin()
+        }
+
     }
 
-    public fun doLogin()
+    fun doLogin()
     {
         if(!viewModel.isEmailValid(binding.emailEdittext.text.toString().trim()))
         {
-            binding.emailEdittext.setError("Email is Invalid!")
+            binding.emailEdittext.setError(getString(R.string.invalid_email_message))
         }
         else if(!viewModel.isPasswordValid(binding.passwordEdittext.text.toString().trim()))
         {
-            binding.passwordEdittext.setError("Password is Invalid!")
+            binding.passwordEdittext.setError(getString(R.string.invalid_password_message))
+            Toast.makeText(context,getString(R.string.password_correction_message),Toast.LENGTH_LONG).show()
         }
         else
         {
             val action = LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
             NavHostFragment.findNavController(this).navigate(action)   // fragment transaction
         }
-
-        val action = LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
-        NavHostFragment.findNavController(this).navigate(action)
     }
 
 }

@@ -27,6 +27,7 @@
 
     //Shoe List Screen
     <string name="floatingButton_description">Add New Shoe Detail</string>
+    <string name="logout_menu">Logout</string>
 
     //Shoe Details Screen
     <string name="shoedetails_textview">Add a new Shoe</string>
@@ -36,6 +37,14 @@
     <string name="shoe_description_textview">Description : </string>
     <string name="cancel_button">Cancel</string>
     <string name="save_button">Save</string>
+
+    //Toast texts
+    <string name="empty_field_message">This Field can not be emptied!</string>
+    <string name="shoe_added_message">Shoe Details has been saved!</string>
+    <string name="invalid_email_message">Email is Invalid!</string>
+    <string name="invalid_password_message">Password is Invalid!</string>
+    <string name="password_correction_message">"Please enter 8 characters long password"</string>
+
 
 
 </resources>

@@ -11,14 +11,6 @@ class ShoeListViewModel : ViewModel() {
     val shoeList : LiveData<ArrayList<Shoe>>
         get() = _shoeList
 
-    private var _shoeName : MutableLiveData<String> = MutableLiveData()
-    val shoeName : LiveData<String>
-        get() = _shoeName
-
-    private var _shoe = MutableLiveData<Shoe>()
-    val shoe : LiveData<Shoe>
-        get() = _shoe
-
     init {
         _shoeList.value= arrayListOf()
         Timber.i("View Model has been Initialized!")
@@ -27,13 +19,6 @@ class ShoeListViewModel : ViewModel() {
     fun addNewShoe(newShoe: Shoe)
     {
         _shoeList.value?.add(newShoe)
-        _shoe.value=newShoe
-        _shoeName.value="Nasim"
-    }
-
-    fun getArraySize() : Int
-    {
-        return arrayOf(_shoeList).size
     }
 
     override fun onCleared() {
