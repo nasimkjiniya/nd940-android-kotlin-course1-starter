@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
+    <!--  Used Constraint Layout  -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/shoeList_layout"
         android:layout_width="match_parent"
@@ -31,6 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <!--  Used Linear Layout  -->
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
@@ -46,8 +48,6 @@
                     android:text="Your Shoe List is Empty!"/>
 
             </LinearLayout>
-
-
 
 
         </ScrollView>

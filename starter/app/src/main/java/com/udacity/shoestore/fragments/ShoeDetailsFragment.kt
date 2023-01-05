@@ -41,6 +41,7 @@ class ShoeDetailsFragment : Fragment() {
     private fun getElements()
     {
         binding.setLifecycleOwner(this)
+        binding.shoe=Shoe()
     }
 
     private fun initElements()
@@ -66,23 +67,12 @@ class ShoeDetailsFragment : Fragment() {
     {
         if(areFeildsValid())
         {
-            val newShoe = Shoe(binding.nameEdittext.text.toString().trim(),binding.sizeEdittext.text.toString().trim().toDoubleOrNull()!!
-            ,binding.companyEdittext.text.toString().trim(),binding.descriptionEdittext.text.toString().trim())
+            val myShoe = Shoe(binding.shoe?.name!!,binding.shoe?.size!!,binding.shoe?.company!!,binding.shoe?.description!!,)
+            MainActivity.viewModel.addNewShoe(myShoe)
 
-            MainActivity.viewModel.addNewShoe(newShoe)
             Toast.makeText(context,getString(R.string.shoe_added_message),Toast.LENGTH_SHORT).show()
-            resetFields()
-//            val action=ShoeDetailsFragmentDirections.actionShoeDetailsFragmentToShoeListFragment()
-//            NavHostFragment.findNavController(this).navigate(action)
+            navigateBack()
         }
-    }
-
-    private fun resetFields()
-    {
-        binding.nameEdittext.text.clear()
-        binding.companyEdittext.text.clear()
-        binding.sizeEdittext.text.clear()
-        binding.descriptionEdittext.text.clear()
     }
 
     private fun areFeildsValid() : Boolean

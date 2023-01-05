@@ -3,11 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="shoe"
+            type="com.udacity.shoestore.models.Shoe"/>
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
+        <!--  Used Constraint Layout  -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/shoeDetails_layout"
         android:layout_width="match_parent"
@@ -46,6 +53,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="25dp"
             android:ems="10"
+            android:text="@={shoe.name}"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:maxLength="30"
@@ -74,6 +82,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
             android:ems="10"
+            android:text="@={shoe.company}"
             android:maxLength="30"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -102,6 +111,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
             android:ems="10"
+            android:text="@={shoe.size}"
             android:maxLength="30"
             android:inputType="numberDecimal"
             android:minHeight="48dp"
@@ -130,6 +140,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
             android:ems="10"
+            android:text="@={shoe.description}"
             android:lines="3"
             android:maxLength="100"
             android:scrollbars="vertical"

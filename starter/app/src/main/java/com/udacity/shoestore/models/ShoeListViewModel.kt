@@ -1,4 +1,4 @@
-package com.udacity.shoestore.models
+package com.udacity. shoestore.models
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +10,7 @@ class ShoeListViewModel : ViewModel() {
     private var _shoeList = MutableLiveData<ArrayList<Shoe>>()
     val shoeList : LiveData<ArrayList<Shoe>>
         get() = _shoeList
+
 
     init {
         _shoeList.value= arrayListOf()
