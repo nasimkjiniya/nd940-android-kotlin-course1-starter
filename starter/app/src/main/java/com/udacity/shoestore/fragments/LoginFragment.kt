@@ -48,7 +48,6 @@ class LoginFragment : Fragment() {
 
     private fun initElements()
     {
-
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true /* enabled by default */) {
                 override fun handleOnBackPressed() {

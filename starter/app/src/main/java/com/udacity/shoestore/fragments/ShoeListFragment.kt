@@ -90,7 +90,8 @@ class ShoeListFragment : Fragment() {
         if(newShoe!=null)
         {
             binding.emptyTextview.visibility=View.GONE
-            name_text.text= newShoe.name.get()+" (${newShoe.size.get()}) \n"+newShoe.company.get()+"\n"+newShoe.description.get()
+            name_text.text= newShoe.name.get()+" (${newShoe.size.get()}) " +
+                    "\n"+newShoe.company.get()+"\n"+newShoe.description.get()
             binding.linearLayout.addView(l)
         }
     }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeDetailsBinding
@@ -42,6 +43,7 @@ class ShoeDetailsFragment : Fragment() {
     {
         binding.setLifecycleOwner(this)
         binding.shoe=Shoe()
+        binding.viewModel=viewModel
     }
 
     private fun initElements()
@@ -51,48 +53,35 @@ class ShoeDetailsFragment : Fragment() {
             navigateBack()
         }
 
-        binding.btnSave.setOnClickListener()
-        {
-            updateList()
-        }
+        viewModel.isNameEmpty.observe(viewLifecycleOwner, Observer { isEmpty->
+            if(isEmpty)
+                binding.nameEdittext.error=getString(R.string.empty_field_message)
+        })
+
+        viewModel.isSizeEmpty.observe(viewLifecycleOwner, Observer { isEmpty->
+            if(isEmpty)
+                binding.sizeEdittext.error= getString(R.string.empty_field_message)
+        })
+
+        viewModel.isCompanyEmpty.observe(viewLifecycleOwner, Observer { isEmpty->
+            if(isEmpty)
+                binding.companyEdittext.error=getString(R.string.empty_field_message)
+        })
+
+        viewModel.isSaved.observe(viewLifecycleOwner, Observer { isDone->
+            if(isDone)
+            {
+                Toast.makeText(context,getString(R.string.shoe_added_message),Toast.LENGTH_SHORT).show()
+                viewModel.shoeDetailsAdded()
+                navigateBack()
+            }
+        })
+
     }
 
-    private fun navigateBack()
-    {
-        val action=ShoeDetailsFragmentDirections.actionShoeDetailsFragmentToShoeListFragment()
+    private fun navigateBack() {
+        val action = ShoeDetailsFragmentDirections.actionShoeDetailsFragmentToShoeListFragment()
         NavHostFragment.findNavController(this).navigate(action)
-    }
-
-    private fun updateList()
-    {
-        if(areFeildsValid())
-        {
-            val myShoe = Shoe(binding.shoe?.name!!,binding.shoe?.size!!,binding.shoe?.company!!,binding.shoe?.description!!,)
-            viewModel.addNewShoe(myShoe)
-
-            Toast.makeText(context,getString(R.string.shoe_added_message),Toast.LENGTH_SHORT).show()
-            navigateBack()
-        }
-    }
-
-    private fun areFeildsValid() : Boolean
-    {
-        if(binding.nameEdittext.text.toString().trim() == "")
-        {
-            binding.nameEdittext.error=getString(R.string.empty_field_message)
-            return false
-        }
-        else if(binding.companyEdittext.text.toString().trim() == "")
-        {
-            binding.companyEdittext.error=getString(R.string.empty_field_message)
-            return false
-        }
-        else if(binding.sizeEdittext.text.toString().trim() == "")
-        {
-            binding.sizeEdittext.error= getString(R.string.empty_field_message)
-            return false
-        }
-        return true
     }
 
 }
