@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
-import com.udacity.shoestore.MainActivity
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeDetailsBinding
 import com.udacity.shoestore.models.Shoe
@@ -18,6 +17,7 @@ import com.udacity.shoestore.models.ShoeListViewModel
 class ShoeDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentShoeDetailsBinding
+    private val viewModel by activityViewModels<ShoeListViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,7 +68,7 @@ class ShoeDetailsFragment : Fragment() {
         if(areFeildsValid())
         {
             val myShoe = Shoe(binding.shoe?.name!!,binding.shoe?.size!!,binding.shoe?.company!!,binding.shoe?.description!!,)
-            MainActivity.viewModel.addNewShoe(myShoe)
+            viewModel.addNewShoe(myShoe)
 
             Toast.makeText(context,getString(R.string.shoe_added_message),Toast.LENGTH_SHORT).show()
             navigateBack()

@@ -1,6 +1,5 @@
 package com.udacity.shoestore.fragments
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
@@ -8,22 +7,23 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.udacity.shoestore.MainActivity
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.models.Shoe
-import kotlinx.android.synthetic.main.fragment_shoe_list.*
-import timber.log.Timber
+import com.udacity.shoestore.models.ShoeListViewModel
+
 
 
 class ShoeListFragment : Fragment() {
 
     private lateinit var binding: FragmentShoeListBinding
+    private val viewModel by activityViewModels<ShoeListViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +44,7 @@ class ShoeListFragment : Fragment() {
 
     private fun initElements()
     {
-        MainActivity.viewModel.shoeList.observe(viewLifecycleOwner, Observer { newShoe ->
+        viewModel.shoeList.observe(viewLifecycleOwner, Observer { newShoe ->
             if(newShoe.size>0)
             {
                 for (n in newShoe.indices){
